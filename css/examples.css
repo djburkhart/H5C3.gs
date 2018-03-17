@@ -1,0 +1,111 @@
+/*
+  FILE: examples.css
+  AUTHOR: Daniel Burkhart
+*/
+
+/*
+  EXAMPLE PAGE LAYOUT
+*/
+header[role="banner"],
+main[role="main"],
+footer[role="contentinfo"] {
+  grid-column-start: 1;
+  grid-column-end: 5;
+}
+
+/*
+  CUSTOM STYLES
+*/
+
+/* General styles */
+* {
+  font-family: sans-serif;
+}
+
+body {
+  background: #fcc244;
+}
+
+h1 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 2em;
+  color: #8c2dff;
+}
+
+h2 {
+  font-family: 'Alegreya Sans SC', sans-serif;
+  font-size: 1.2rem;
+  color: #8c2dff;
+}
+
+p {
+  color: #aa66ff;
+}
+
+a, a:hover, a:visited, a:active {
+  text-decoration: none;
+  color: #8c2dff;
+}
+
+/* Header styles */
+header[role="banner"] {
+  padding: 10px;
+}
+
+/* Navigation styles */
+nav[role="navigation"] {
+  padding: 25px 0 0 0;
+}
+
+nav[role="navigation"] a {
+  color: white;
+  padding: 10px;
+}
+
+nav[role="navigation"] > ul {
+  text-align: center;
+  line-height: 25px;
+}
+
+nav[role="navigation"] > ul > li:hover {
+  width: 100%;
+}
+
+nav[role="navigation"] > ul > li {
+  background: #8c2dff;
+  border-bottom: 1px dashed #fcc244;
+  overflow: hidden;
+  width: 25%;
+  height: 50px;
+  transition: width 1s;
+}
+
+nav[role="navigation"] > ul > li:last-child {
+  border-bottom: none;
+}
+
+/* Main content styles */
+main[role="main"] {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px dashed #ffbc2d;
+  padding: 25px;
+  height: 100vh;
+}
+
+main[role="main"] h1, h2 {
+  border-bottom: 5px solid #8c2dff;
+}
+
+main[role="main"] aside > p,
+main[role="main"] article > p {
+  padding: 5px 0 0 0;
+}
+
+/* Footer styles */
+footer[role="contentinfo"] {
+  text-align: center;
+}
+
+footer[role="contentinfo"] p {
+  color: #8c2dff;
+}

@@ -32,87 +32,109 @@ html {
 }
 
 /*
-  DEFINE GRID GLOBAL CALCULATIONS
+  CHECK BROWSER SUPPORT
 */
+@supports (display: grid) and (--columns: 2) {
+  /*
+    DEFINE GRID GLOBAL CALCULATIONS
+  */
 
-/* Default grid values (Defaults to a 2x2 grid) */
-:root {
-  --target-width: 100vw;
-  --column-spacing: 10px;
-  --columns: 2;
+  /* Default grid values (Defaults to a 2x2 grid) */
+  :root {
+    --target-width: 100vw;
+    --column-spacing: 10px;
+    --columns: 2;
 
-  --target-height: 100vh;
-  --row-spacing: 10px;
-  --rows: 2;
-}
+    --target-height: 100vh;
+    --row-spacing: 10px;
+    --rows: 2;
+  }
 
-/* Grid values calculator */
-*[aria-label*="grid"] {
-  display: grid;
+  /* Grid values calculator */
+  *[aria-label*="grid"] {
+    display: grid;
 
-  grid-column-gap: var(--column-spacing);
-  grid-row-gap: var(--row-spacing);
-  grid-template-columns: repeat(var(--columns), [col-start] calc((var(--target-width) - var(--column-spacing) * (var(--columns) + 1)) / var(--columns)));
-  grid-template-rows: auto;
+    grid-column-gap: var(--column-spacing);
+    grid-row-gap: var(--row-spacing);
+    grid-template-columns: repeat(var(--columns), [col-start] calc((var(--target-width) - var(--column-spacing) * (var(--columns) + 1)) / var(--columns)));
+    grid-template-rows: auto;
 
-  grid-auto-flow: column;
-  grid-column: col-start / var(--columns);
-  grid-row: row-start / var(--rows);
+    grid-auto-flow: column;
+    grid-column: col-start / var(--columns);
+    grid-row: row-start / var(--rows);
 
-  align-content: start;
-  justify-content: start;
+    align-content: start;
+    justify-content: start;
 
-  width: 100%;
-  min-height: 1px;
-}
+    width: 100%;
+    min-height: 1px;
+  }
 
-/*
-  DEFINE NESTED GRID CALCULATIONS
-*/
+  /*
+    DEFINE NESTED GRID CALCULATIONS
+  */
 
-/* Subgrid values calculator */
-*[aria-label*="grid"] > *[aria-label*="subgrid"] {
-  display: grid;
+  /* Subgrid values calculator */
+  *[aria-label*="grid"] > *[aria-label*="subgrid"] {
+    display: grid;
 
-  grid-column-gap: calc(var(--column-spacing) / 2);
-  grid-row-gap: calc(var(--row-spacing) / 2);
+    grid-column-gap: calc(var(--column-spacing) / 2);
+    grid-row-gap: calc(var(--row-spacing) / 2);
 
-  grid-template-columns: repeat(var(--columns), [sub-col-start] calc((100% - (var(--column-spacing) / 2) * (var(--columns) + 1)) / var(--columns)));
-  grid-template-rows: auto;
+    grid-template-columns: repeat(var(--columns), [sub-col-start] calc((100% - (var(--column-spacing) / 2) * (var(--columns) + 1)) / var(--columns)));
+    grid-template-rows: auto;
 
-  grid-auto-flow: row;
-  grid-column: sub-col-start / var(--columns);
-  grid-row: sub-row-start / var(--rows);
+    grid-auto-flow: row;
+    grid-column: sub-col-start / var(--columns);
+    grid-row: sub-row-start / var(--rows);
 
-  align-self: start;
-  justify-self: start;
-}
+    align-self: start;
+    justify-self: start;
+  }
 
-/*
-  DEFINE GRIDS
-*/
+  /*
+    DEFINE GRIDS
+  */
 
-/* 2x2 grid */
-*[aria-label*="two"] {
-  --columns: 2;
-  --rows: 2;
-}
+  /* 2x2 grid */
+  *[aria-label*="two"] {
+    --columns: 2;
+    --rows: 2;
+  }
 
-/* 3x3 grid */
-*[aria-label*="three"] {
-  --columns: 3;
-  --rows: 3;
-}
+  /* 3x3 grid */
+  *[aria-label*="three"] {
+    --columns: 3;
+    --rows: 3;
+  }
 
-/* 4x4 grid */
-*[aria-label*="four"] {
-  --columns: 4;
-  --rows: 4;
+  /* 4x4 grid */
+  *[aria-label*="four"] {
+    --columns: 4;
+    --rows: 4;
+  }
 }
 
 /*
   DEBUGGING
 */
+
+/* Error msg display */
+#msg {
+  position: absolute;
+  text-align: center;
+  color: #ff3542;
+}
+
+#msg h1 {
+  color: #ff3542;
+}
+
+#msg p {
+  color: #ff3542;
+}
+
+/* Grid display helper */
 .debug * {
   background: salmon;
   border: 1px dotted grey;

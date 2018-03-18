@@ -1,18 +1,15 @@
-function FixSubgrids(w, d) {
-  var element = d.querySelector('main[aria-label="four-column-grid"]');
-  var elementStyle = element.style;
-  var computedStyle = w.getComputedStyle(element, null);
-  var outputStyle = '';
+/*
+  CHECKS BROWSER SUPPORT FOR CSS GRIDS
+*/
+function browserSupportsCSS3Vars() {
+  return window.CSS.supports('display', 'grid');
+}
 
-  if (element.contains(element) !== true) {
-    if (elementStyle.display === 'subgrid') {
-      computedStyle.display = 'grid';
-      computedStyle.cssText = "grid-template-columns: repeat(var(--columns), calc(" + element.offsetWidth + " - (var(--column-spacing) * var(columns)) / var(--columns)) [subgrid-col-start]))";
-      computedStyle.cssText = "grid-template-rows: auto; grid-auto-flow: row; grid-row-gap: var(--row-spacing);"
-    }
+(function () {
+  document.getElementById('msg').style.visibility = 'hidden';
+
+  if (browserSupportsCSS3Vars() !== true) {
+    document.getElementById('msg').style.visibility = 'visible';
+    document.getElementsByTagName('section')[0].style.visibility = 'hidden';
   }
-}(window, document);
-
-(function (w, d) {
-  FixSubgrids(w, d);
-})(window, document);
+})();

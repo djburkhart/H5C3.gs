@@ -14,6 +14,7 @@
   font-family: inherit;
   font-style: inherit;
   font-size: 100%;
+  overflow-x: hidden;
   border: 0 none;
   outline: 0;
   padding: 0;

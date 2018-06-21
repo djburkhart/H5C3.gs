@@ -121,7 +121,7 @@ html {
 
 /* Error msg display */
 #msg {
-  position: absolute;
+  margin: 0 auto;
   text-align: center;
   color: #ff3542;
 }

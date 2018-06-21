@@ -14,6 +14,7 @@
   font-family: inherit;
   font-style: inherit;
   font-size: 100%;
+  overflow-x: hidden;
   border: 0 none;
   outline: 0;
   padding: 0;
@@ -121,7 +122,7 @@ html {
 
 /* Error msg display */
 #msg {
-  position: absolute;
+  margin: 0 auto;
   text-align: center;
   color: #ff3542;
 }

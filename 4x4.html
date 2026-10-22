@@ -1,52 +1,99 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>4-column grid — H5C3.gs</title>
+  <meta name="description" content="A responsive four-column layout built with H5C3.gs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/H5C3.gs.css">
+  <link rel="stylesheet" href="css/examples.css">
+</head>
+<body class="site">
+  <a class="skip-link" href="#content">Skip to content</a>
 
-    <title>H5C3.gs 4x4 Example</title>
-
-    <link rel="stylesheet" type="text/css" href="css/H5C3.gs.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:900" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/examples.css">
-  </head>
-  <body>
-    <section role="region" aria-label="four-column-grid">
-      <header role="banner">
-        <h1>H5C3.gs 4x4 Example</h1>
-      </header>
-      <nav role="navigation">
+  <header class="masthead">
+    <div>
+      <p class="brand">H5C3.gs</p>
+      <h1>Four-column grid</h1>
+      <p class="lede">Four tracks at full width, then three, two, and one. A <code>span-2</code> card covers half the row while four tracks fit, and the whole row when only two remain.</p>
+    </div>
+    <div class="masthead-tools">
+      <nav class="site-nav" aria-label="Grid examples">
         <ul>
-          <li>
-            <a href="2x2.html">2x2 Grid</a>
-          </li>
-          <li>
-            <a href="3x3.html">3x3 Grid</a>
-          </li>
-          <li>
-            <a href="4x4.html">4x4 Grid</a>
-          </li>
+          <li><a href="2x2.html">2 columns</a></li>
+          <li><a href="3x3.html">3 columns</a></li>
+          <li><a href="4x4.html" aria-current="page">4 columns</a></li>
         </ul>
       </nav>
-      <main role="main" aria-label="two-column-subgrid">
-        <section role="region" aria-label="page-info">
-          <article>
-            <h2>Project Info</h2>
-            <p>H5C3.gs stands for "HTML5 CSS3 Grid System." H5C3.gs is a modern web framework designed for modern web browsers.</p>
-          </article>
-        </section>
-        <aside role="complementary">
-          <h2>Page Info</h2>
-          <p>This is an example of a 4x4 grid.</p>
-        </aside>
-      </main>
-      <footer role="contentinfo">
-        <article>
-          <p>&copy; Daniel Burkhart. All rights reserved.</p>
-        </article>
-      </footer>
+      <button type="button" class="debug-toggle" data-debug-toggle aria-pressed="false">Show grid lines</button>
+    </div>
+  </header>
+
+  <main id="content" class="grid page" data-cols="4" data-min="12rem" tabindex="-1">
+    <section class="intro span-all">
+      <p class="kicker">data-cols="4"</p>
+      <h2>Spans that follow the tracks</h2>
+      <p>A span of two is half of this grid on a wide screen. When the grid collapses to two columns, that same span fills the row instead of overflowing it.</p>
+      <p class="readout">Showing <strong data-reflect="content">4</strong> columns. Subgrid: <strong data-reflect="aligned">4</strong> tracks.</p>
+      <pre><code>&lt;main class="grid" data-cols="4" data-min="12rem"&gt;
+  &lt;section class="span-all"&gt;…&lt;/section&gt;
+  &lt;article class="span-2"&gt;…&lt;/article&gt;
+  &lt;article class="span-2"&gt;…&lt;/article&gt;
+&lt;/main&gt;</code></pre>
     </section>
 
-    <script src="js/H5C3.js" type="text/javascript"></script>
-  </body>
+    <article class="card">
+      <p class="kicker">01</p>
+      <h2>Project info</h2>
+      <p>H5C3.gs stands for HTML5 CSS grid system. The examples in this folder are the same three layouts, rebuilt so they respond.</p>
+    </article>
+
+    <article class="card">
+      <p class="kicker">02</p>
+      <h2>Page info</h2>
+      <p>This is the four-column example. The four cards in this row are equal tracks.</p>
+    </article>
+
+    <article class="card">
+      <p class="kicker">03</p>
+      <h2>Gaps scale</h2>
+      <p>The gap uses a fluid clamp, and a data-gap token or any CSS length can replace it.</p>
+    </article>
+
+    <article class="card">
+      <p class="kicker">04</p>
+      <h2>Debug</h2>
+      <p>Use “Show grid lines” to label each cell with its computed grid-column value.</p>
+    </article>
+
+    <article class="card span-2">
+      <p class="kicker">span-2</p>
+      <h2>Half of a four-column row</h2>
+      <p>Paired with the next card, this covers the left half while four columns fit. On a narrower grid it takes the whole row.</p>
+    </article>
+
+    <article class="card span-2">
+      <p class="kicker">span-2</p>
+      <h2>The other half</h2>
+      <p>Both cards use the same span. Nothing is hard-coded to “column 3 through column 5”.</p>
+    </article>
+
+    <div class="subgrid band" id="aligned">
+      <h2 class="span-all">Subgrid tracks</h2>
+      <p class="track"><strong>1</strong> First column of the page grid.</p>
+      <p class="track"><strong>2</strong> Second column.</p>
+      <p class="track"><strong>3</strong> Third column.</p>
+      <p class="track"><strong>4</strong> Fourth column.</p>
+    </div>
+  </main>
+
+  <footer class="colophon">
+    <p>&copy; Daniel Burkhart. All rights reserved.</p>
+  </footer>
+
+  <script src="js/H5C3.js"></script>
+</body>
 </html>

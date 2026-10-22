@@ -1,52 +1,85 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>2-column grid — H5C3.gs</title>
+  <meta name="description" content="A responsive two-column layout built with H5C3.gs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/H5C3.gs.css">
+  <link rel="stylesheet" href="css/examples.css">
+</head>
+<body class="site">
+  <a class="skip-link" href="#content">Skip to content</a>
 
-    <title>H5C3.gs 2x2 Example</title>
-
-    <link rel="stylesheet" type="text/css" href="css/H5C3.gs.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:900" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/examples.css">
-  </head>
-  <body>
-    <section role="region" aria-label="two-column-grid">
-      <header role="banner">
-        <h1>H5C3.gs 2x2 Example</h1>
-      </header>
-      <nav role="navigation">
+  <header class="masthead">
+    <div>
+      <p class="brand">H5C3.gs</p>
+      <h1>Two-column grid</h1>
+      <p class="lede">Columns sit side by side while there is room, then stack. The cap stays at two.</p>
+    </div>
+    <div class="masthead-tools">
+      <nav class="site-nav" aria-label="Grid examples">
         <ul>
-          <li>
-            <a href="2x2.html">2x2 Grid</a>
-          </li>
-          <li>
-            <a href="3x3.html">3x3 Grid</a>
-          </li>
-          <li>
-            <a href="4x4.html">4x4 Grid</a>
-          </li>
+          <li><a href="2x2.html" aria-current="page">2 columns</a></li>
+          <li><a href="3x3.html">3 columns</a></li>
+          <li><a href="4x4.html">4 columns</a></li>
         </ul>
       </nav>
-      <main role="main" aria-label="two-column-subgrid">
-        <section role="region" aria-label="page-info">
-          <article>
-            <h2>Project Info</h2>
-            <p>H5C3.gs stands for "HTML5 CSS3 Grid System." H5C3.gs is a modern web framework designed for modern web browsers.</p>
-          </article>
-        </section>
-        <aside role="complementary">
-          <h2>Page Info</h2>
-          <p>This is an example of a 2x2 grid.</p>
-        </aside>
-      </main>
-      <footer role="contentinfo">
-        <article>
-          <p>&copy; Daniel Burkhart. All rights reserved.</p>
-        </article>
-      </footer>
+      <button type="button" class="debug-toggle" data-debug-toggle aria-pressed="false">Show grid lines</button>
+    </div>
+  </header>
+
+  <main id="content" class="grid page" data-cols="2" data-min="17rem" tabindex="-1">
+    <section class="intro span-all">
+      <p class="kicker">data-cols="2"</p>
+      <h2>A cap, not a fixed frame</h2>
+      <p>Resize the window. This grid never grows past two columns, and it becomes one column when a track would be narrower than 17rem.</p>
+      <p class="readout">Showing <strong data-reflect="content">2</strong> columns. The subgrid is using <strong data-reflect="aligned">2</strong> tracks.</p>
+      <pre><code>&lt;main class="grid" data-cols="2" data-min="17rem"&gt;
+  &lt;section class="span-all"&gt;…&lt;/section&gt;
+  &lt;article&gt;…&lt;/article&gt;
+  &lt;aside&gt;…&lt;/aside&gt;
+&lt;/main&gt;</code></pre>
     </section>
 
-    <script src="js/H5C3.js" type="text/javascript"></script>
-  </body>
+    <article class="card">
+      <p class="kicker">01</p>
+      <h2>Project info</h2>
+      <p>H5C3.gs is an HTML5 and CSS grid system. Version 2 lays pages out with fluid tracks instead of a calculated pixel width.</p>
+    </article>
+
+    <aside class="card">
+      <p class="kicker">02</p>
+      <h2>Page info</h2>
+      <p>This page is the two-column example. Both cards share one row on a wide screen and stack on a narrow one.</p>
+    </aside>
+
+    <article class="card">
+      <p class="kicker">03</p>
+      <h2>Fluid tracks</h2>
+      <p>Each column is at least the minimum size, and leftover space is shared. No breakpoint list is required.</p>
+    </article>
+
+    <article class="card">
+      <p class="kicker">04</p>
+      <h2>Measured spans</h2>
+      <p>The script counts real tracks and keeps a span from opening an extra column.</p>
+    </article>
+
+    <div class="subgrid band" id="aligned">
+      <h2 class="span-all">Subgrid tracks</h2>
+      <p class="track"><strong>Track A</strong> This cell uses the parent grid’s first column.</p>
+      <p class="track"><strong>Track B</strong> This cell uses the second column, including the same gap.</p>
+    </div>
+  </main>
+
+  <footer class="colophon">
+    <p>&copy; Daniel Burkhart. All rights reserved.</p>
+  </footer>
+
+  <script src="js/H5C3.js"></script>
+</body>
 </html>

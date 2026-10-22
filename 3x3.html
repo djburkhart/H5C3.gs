@@ -1,52 +1,94 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>3-column grid — H5C3.gs</title>
+  <meta name="description" content="A responsive three-column layout built with H5C3.gs.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/H5C3.gs.css">
+  <link rel="stylesheet" href="css/examples.css">
+</head>
+<body class="site">
+  <a class="skip-link" href="#content">Skip to content</a>
 
-    <title>H5C3.gs 3x3 Example</title>
-
-    <link rel="stylesheet" type="text/css" href="css/H5C3.gs.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:900" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/examples.css">
-  </head>
-  <body>
-    <section role="region" aria-label="three-column-grid">
-      <header role="banner">
-        <h1>H5C3.gs 3x3 Example</h1>
-      </header>
-      <nav role="navigation">
+  <header class="masthead">
+    <div>
+      <p class="brand">H5C3.gs</p>
+      <h1>Three-column grid</h1>
+      <p class="lede">Three equal tracks when they fit, then two, then one. Named areas redraw the story and the notes to match.</p>
+    </div>
+    <div class="masthead-tools">
+      <nav class="site-nav" aria-label="Grid examples">
         <ul>
-          <li>
-            <a href="2x2.html">2x2 Grid</a>
-          </li>
-          <li>
-            <a href="3x3.html">3x3 Grid</a>
-          </li>
-          <li>
-            <a href="4x4.html">4x4 Grid</a>
-          </li>
+          <li><a href="2x2.html">2 columns</a></li>
+          <li><a href="3x3.html" aria-current="page">3 columns</a></li>
+          <li><a href="4x4.html">4 columns</a></li>
         </ul>
       </nav>
-      <main role="main" aria-label="two-column-subgrid">
-        <section role="region" aria-label="page-info">
-          <article>
-            <h2>Project Info</h2>
-            <p>H5C3.gs stands for "HTML5 CSS3 Grid System." H5C3.gs is a modern web framework designed for modern web browsers.</p>
-          </article>
-        </section>
-        <aside role="complementary">
-          <h2>Page Info</h2>
-          <p>This is an example of a 3x3 grid.</p>
-        </aside>
-      </main>
-      <footer role="contentinfo">
-        <article>
-          <p>&copy; Daniel Burkhart. All rights reserved.</p>
-        </article>
-      </footer>
+      <button type="button" class="debug-toggle" data-debug-toggle aria-pressed="false">Show grid lines</button>
+    </div>
+  </header>
+
+  <main id="content" class="grid page" data-cols="3" data-min="14rem" tabindex="-1">
+    <section class="intro span-all">
+      <p class="kicker">data-cols="3"</p>
+      <h2>Equal cards, then a 2 + 1 split</h2>
+      <p>The cards below wrap on their own. The story block uses an area template: two columns plus a note when three tracks exist, and a stack when they do not.</p>
+      <p class="readout">Showing <strong data-reflect="content">3</strong> columns. Regions: <strong data-reflect="split">3</strong>. Subgrid: <strong data-reflect="aligned">3</strong>.</p>
+      <pre><code>&lt;div class="grid" data-cols="3"
+     data-template="story | notes"
+     data-template-3="story story notes"&gt;
+  &lt;article data-area="story"&gt;…&lt;/article&gt;
+  &lt;aside data-area="notes"&gt;…&lt;/aside&gt;
+&lt;/div&gt;</code></pre>
     </section>
 
-    <script src="js/H5C3.js" type="text/javascript"></script>
-  </body>
+    <article class="card">
+      <p class="kicker">01</p>
+      <h2>Project info</h2>
+      <p>H5C3.gs is an HTML5 and CSS grid system for pages that have to work from a phone width up to a wide desktop.</p>
+    </article>
+
+    <article class="card">
+      <p class="kicker">02</p>
+      <h2>Page info</h2>
+      <p>This is the three-column example. Empty cells are not reserved: items flow into the next row.</p>
+    </article>
+
+    <article class="card">
+      <p class="kicker">03</p>
+      <h2>No aria layout</h2>
+      <p>Column count is a data attribute. Accessible names stay available for assistive technology.</p>
+    </article>
+
+    <div class="grid span-all" id="split" data-cols="3" data-min="14rem" data-template="story | notes" data-template-3="story story notes">
+      <article class="card" data-area="story">
+        <p class="kicker">Story</p>
+        <h2>Two tracks for the article</h2>
+        <p>At three columns this article covers the first two tracks and the notes sit in the third. At two columns they share the row. At one column they stack.</p>
+      </article>
+      <aside class="card" data-area="notes">
+        <p class="kicker">Notes</p>
+        <h2>Sidebar</h2>
+        <p>The template follows the measured column count, so the sidebar never opens a fourth track.</p>
+      </aside>
+    </div>
+
+    <div class="subgrid band" id="aligned">
+      <h2 class="span-all">Subgrid tracks</h2>
+      <p class="track"><strong>One</strong> Aligned to the first column of the page grid.</p>
+      <p class="track"><strong>Two</strong> Aligned to the second column.</p>
+      <p class="track"><strong>Three</strong> Aligned to the third column.</p>
+    </div>
+  </main>
+
+  <footer class="colophon">
+    <p>&copy; Daniel Burkhart. All rights reserved.</p>
+  </footer>
+
+  <script src="js/H5C3.js"></script>
+</body>
 </html>

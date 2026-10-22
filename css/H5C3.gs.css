@@ -1,142 +1,427 @@
 /*
-  FILE: H5C3.gs.css
-  AUTHOR: Daniel Burkhart
+  H5C3.gs 2.0
+  Responsive grid system for modern browsers.
+
+  A .grid lays out its children with CSS grid. Without data-cols it fits as
+  many columns as --min allows. With data-cols it never exceeds that count,
+  keeps those tracks when a row is not full, and drops columns when the
+  container gets narrower.
+
+  Spans and offsets are clamped so they cannot create extra columns.
+  JavaScript (js/H5C3.js) measures the real track count and writes
+  --current-cols. Container queries cover the same cases before that runs.
 */
 
-/*
-  CSS GLOBAL RESETS
-*/
-
-/* Global Reset CSS */
-* {
-  vertical-align: baseline;
-  font-weight: inherit;
-  font-family: inherit;
-  font-style: inherit;
-  font-size: 100%;
-  overflow-x: hidden;
-  border: 0 none;
-  outline: 0;
-  padding: 0;
-  margin: 0;
+:root {
+  --h5c3-cols: 12;
+  --h5c3-min: 16rem;
+  --h5c3-gap: clamp(0.75rem, 1.2vw, 1.25rem);
 }
 
-/* See https://www.paulirish.com/2012/box-sizing-border-box-ftw/ for details */
-html {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
-  width: 100%;
+}
+
+html {
   height: 100%;
 }
 
-*, *:before, *:after {
-  box-sizing: inherit;
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+.grid {
+  --cols: var(--h5c3-cols);
+  --min: var(--h5c3-min);
+  --gap: var(--h5c3-gap);
+  --current-cols: var(--cols);
+
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  gap: var(--gap);
+  align-items: stretch;
+  align-content: start;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+  container-type: inline-size;
+  container-name: h5c3;
+}
+
+.grid > * {
+  min-width: 0;
+  min-inline-size: 0;
 }
 
 /*
-  CHECK BROWSER SUPPORT
+  Capped grids. The minimum track is the larger of --min and an even share of
+  the row, so auto-fit cannot exceed --cols and still collapses when the
+  share drops below --min.
 */
-@supports (display: grid) and (--columns: 2) {
-  /*
-    DEFINE GRID GLOBAL CALCULATIONS
-  */
+.grid[data-cols] {
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(
+      min(
+        100%,
+        max(var(--min), (100% - (var(--cols) - 1) * var(--gap)) / var(--cols))
+      ),
+      1fr
+    )
+  );
+}
 
-  /* Default grid values (Defaults to a 2x2 grid) */
-  :root {
-    --target-width: 100vw;
-    --column-spacing: 10px;
-    --columns: 2;
+.grid[data-cols="1"] { --cols: 1; }
+.grid[data-cols="2"] { --cols: 2; }
+.grid[data-cols="3"] { --cols: 3; }
+.grid[data-cols="4"] { --cols: 4; }
+.grid[data-cols="5"] { --cols: 5; }
+.grid[data-cols="6"] { --cols: 6; }
+.grid[data-cols="7"] { --cols: 7; }
+.grid[data-cols="8"] { --cols: 8; }
+.grid[data-cols="9"] { --cols: 9; }
+.grid[data-cols="10"] { --cols: 10; }
+.grid[data-cols="11"] { --cols: 11; }
+.grid[data-cols="12"] { --cols: 12; }
 
-    --target-height: 100vh;
-    --row-spacing: 10px;
-    --rows: 2;
-  }
-
-  /* Grid values calculator */
-  *[aria-label*="grid"] {
-    display: grid;
-
-    grid-column-gap: var(--column-spacing);
-    grid-row-gap: var(--row-spacing);
-    grid-template-columns: repeat(var(--columns), [col-start] calc((var(--target-width) - var(--column-spacing) * (var(--columns) + 1)) / var(--columns)));
-    grid-template-rows: auto;
-
-    grid-auto-flow: column;
-    grid-column: col-start / var(--columns);
-    grid-row: row-start / var(--rows);
-
-    align-content: start;
-    justify-content: start;
-
-    width: 100%;
-    min-height: 1px;
-  }
-
-  /*
-    DEFINE NESTED GRID CALCULATIONS
-  */
-
-  /* Subgrid values calculator */
-  *[aria-label*="grid"] > *[aria-label*="subgrid"] {
-    display: grid;
-
-    grid-column-gap: calc(var(--column-spacing) / 2);
-    grid-row-gap: calc(var(--row-spacing) / 2);
-
-    grid-template-columns: repeat(var(--columns), [sub-col-start] calc((100% - (var(--column-spacing) / 2) * (var(--columns) + 1)) / var(--columns)));
-    grid-template-rows: auto;
-
-    grid-auto-flow: row;
-    grid-column: sub-col-start / var(--columns);
-    grid-row: sub-row-start / var(--rows);
-
-    align-self: start;
-    justify-self: start;
-  }
-
-  /*
-    DEFINE GRIDS
-  */
-
-  /* 2x2 grid */
-  *[aria-label*="two"] {
-    --columns: 2;
-    --rows: 2;
-  }
-
-  /* 3x3 grid */
-  *[aria-label*="three"] {
-    --columns: 3;
-    --rows: 3;
-  }
-
-  /* 4x4 grid */
-  *[aria-label*="four"] {
-    --columns: 4;
-    --rows: 4;
+@supports (z-index: attr(data-cols type(<number>))) {
+  .grid[data-cols] {
+    --cols: attr(data-cols type(<number>));
   }
 }
 
-/*
-  DEBUGGING
-*/
+/* Exact column count. Tracks shrink instead of wrapping. */
+.grid[data-layout="fixed"] {
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+}
 
-/* Error msg display */
-#msg {
-  margin: 0 auto;
+.grid[data-min="xs"] { --min: 8rem; }
+.grid[data-min="sm"] { --min: 12rem; }
+.grid[data-min="md"] { --min: 16rem; }
+.grid[data-min="lg"] { --min: 22rem; }
+.grid[data-min="xl"] { --min: 30rem; }
+
+@supports (width: attr(data-min type(<length>))) {
+  .grid[data-min$="px"],
+  .grid[data-min$="rem"],
+  .grid[data-min$="em"],
+  .grid[data-min$="ch"],
+  .grid[data-min$="ex"],
+  .grid[data-min$="vw"],
+  .grid[data-min$="vh"],
+  .grid[data-min$="cqw"] {
+    --min: attr(data-min type(<length>));
+  }
+}
+
+.grid[data-gap="none"] { --gap: 0px; }
+.grid[data-gap="xs"] { --gap: 0.25rem; }
+.grid[data-gap="sm"] { --gap: 0.5rem; }
+.grid[data-gap="md"] { --gap: 1rem; }
+.grid[data-gap="lg"] { --gap: 1.5rem; }
+.grid[data-gap="xl"] { --gap: 2.5rem; }
+
+@supports (width: attr(data-gap type(<length>))) {
+  .grid[data-gap$="px"],
+  .grid[data-gap$="rem"],
+  .grid[data-gap$="em"],
+  .grid[data-gap$="ch"],
+  .grid[data-gap$="vw"],
+  .grid[data-gap$="cqw"] {
+    --gap: attr(data-gap type(<length>));
+  }
+}
+
+.grid[data-align="start"] { align-items: start; }
+.grid[data-align="center"] { align-items: center; }
+.grid[data-align="end"] { align-items: end; }
+.grid[data-align="stretch"] { align-items: stretch; }
+
+.grid[data-justify="start"] { justify-items: start; }
+.grid[data-justify="center"] { justify-items: center; }
+.grid[data-justify="end"] { justify-items: end; }
+.grid[data-justify="stretch"] { justify-items: stretch; }
+
+.grid[data-flow="column"] { grid-auto-flow: column; }
+.grid[data-flow="dense"] { grid-auto-flow: row dense; }
+.grid[data-flow="column-dense"] { grid-auto-flow: column dense; }
+
+.grid[data-rows="2"] { grid-template-rows: repeat(2, minmax(0, auto)); }
+.grid[data-rows="3"] { grid-template-rows: repeat(3, minmax(0, auto)); }
+.grid[data-rows="4"] { grid-template-rows: repeat(4, minmax(0, auto)); }
+.grid[data-rows="5"] { grid-template-rows: repeat(5, minmax(0, auto)); }
+.grid[data-rows="6"] { grid-template-rows: repeat(6, minmax(0, auto)); }
+
+/* Column spans. Start stays auto so items keep flowing. */
+.span-1 { --span: 1; }
+.span-2 { --span: 2; }
+.span-3 { --span: 3; }
+.span-4 { --span: 4; }
+.span-5 { --span: 5; }
+.span-6 { --span: 6; }
+.span-7 { --span: 7; }
+.span-8 { --span: 8; }
+.span-9 { --span: 9; }
+.span-10 { --span: 10; }
+.span-11 { --span: 11; }
+.span-12 { --span: 12; }
+
+.span-1,
+.span-2,
+.span-3,
+.span-4,
+.span-5,
+.span-6,
+.span-7,
+.span-8,
+.span-9,
+.span-10,
+.span-11,
+.span-12 {
+  grid-column: auto / span min(var(--span), var(--current-cols));
+}
+
+.span-all {
+  grid-column: 1 / -1;
+}
+
+.offset-1 { --off: 1; }
+.offset-2 { --off: 2; }
+.offset-3 { --off: 3; }
+.offset-4 { --off: 4; }
+.offset-5 { --off: 5; }
+.offset-6 { --off: 6; }
+.offset-7 { --off: 7; }
+.offset-8 { --off: 8; }
+.offset-9 { --off: 9; }
+.offset-10 { --off: 10; }
+.offset-11 { --off: 11; }
+
+.offset-1,
+.offset-2,
+.offset-3,
+.offset-4,
+.offset-5,
+.offset-6,
+.offset-7,
+.offset-8,
+.offset-9,
+.offset-10,
+.offset-11 {
+  grid-column:
+    calc(min(var(--off), max(var(--current-cols) - 1, 0)) + 1)
+    / span max(
+      min(
+        var(--span, 1),
+        var(--current-cols) - min(var(--off), max(var(--current-cols) - 1, 0))
+      ),
+      1
+    );
+}
+
+.row-span-2 { grid-row: span 2; }
+.row-span-3 { grid-row: span 3; }
+
+.order-first { order: -1; }
+.order-last { order: 1; }
+
+.self-start { place-self: start; }
+.self-center { place-self: center; }
+.self-end { place-self: end; }
+.self-stretch { place-self: stretch; }
+
+/*
+  Before JS measures the grid, multi-column spans become full width once the
+  container is too narrow for that many 16rem tracks. Thresholds assume the
+  default --min (16rem) and a gap up to 1.25rem. Measured grids override these
+  with the real track count, so a custom --min still clamps correctly.
+*/
+@container h5c3 (inline-size < 34rem) {
+  :is(
+    .span-2, .span-3, .span-4, .span-5, .span-6,
+    .span-7, .span-8, .span-9, .span-10, .span-11, .span-12,
+    .offset-1, .offset-2, .offset-3, .offset-4, .offset-5, .offset-6,
+    .offset-7, .offset-8, .offset-9, .offset-10, .offset-11
+  ) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 51rem) {
+  :is(
+    .span-3, .span-4, .span-5, .span-6,
+    .span-7, .span-8, .span-9, .span-10, .span-11, .span-12,
+    .offset-2, .offset-3, .offset-4, .offset-5, .offset-6,
+    .offset-7, .offset-8, .offset-9, .offset-10, .offset-11
+  ) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 68rem) {
+  :is(
+    .span-4, .span-5, .span-6, .span-7, .span-8,
+    .span-9, .span-10, .span-11, .span-12,
+    .offset-3, .offset-4, .offset-5, .offset-6,
+    .offset-7, .offset-8, .offset-9, .offset-10, .offset-11
+  ) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 86rem) {
+  :is(
+    .span-5, .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12,
+    .offset-4, .offset-5, .offset-6, .offset-7, .offset-8, .offset-9, .offset-10, .offset-11
+  ) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 103rem) {
+  :is(
+    .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12,
+    .offset-5, .offset-6, .offset-7, .offset-8, .offset-9, .offset-10, .offset-11
+  ) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 120rem) {
+  :is(.span-7, .span-8, .span-9, .span-10, .span-11, .span-12) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 137rem) {
+  :is(.span-8, .span-9, .span-10, .span-11, .span-12) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 155rem) {
+  :is(.span-9, .span-10, .span-11, .span-12) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 172rem) {
+  :is(.span-10, .span-11, .span-12) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 189rem) {
+  :is(.span-11, .span-12) {
+    grid-column: 1 / -1;
+  }
+}
+
+@container h5c3 (inline-size < 206rem) {
+  .span-12 {
+    grid-column: 1 / -1;
+  }
+}
+
+:is(.grid, .subgrid)[data-measured] > :is(
+  .span-2, .span-3, .span-4, .span-5, .span-6,
+  .span-7, .span-8, .span-9, .span-10, .span-11, .span-12
+):not([class*="offset-"]) {
+  grid-column: auto / span min(var(--span), var(--current-cols));
+}
+
+:is(.grid, .subgrid)[data-measured] > :is(
+  .offset-1, .offset-2, .offset-3, .offset-4, .offset-5, .offset-6,
+  .offset-7, .offset-8, .offset-9, .offset-10, .offset-11
+) {
+  grid-column:
+    calc(min(var(--off), max(var(--current-cols) - 1, 0)) + 1)
+    / span max(
+      min(
+        var(--span, 1),
+        var(--current-cols) - min(var(--off), max(var(--current-cols) - 1, 0))
+      ),
+      1
+    );
+}
+
+.subgrid {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+  min-width: 0;
+}
+
+.subgrid > * {
+  min-width: 0;
+  min-inline-size: 0;
+}
+
+@supports not (grid-template-columns: subgrid) {
+  .subgrid {
+    --cols: var(--h5c3-cols);
+    --min: var(--h5c3-min);
+    --gap: var(--h5c3-gap);
+    --current-cols: var(--cols);
+    gap: var(--gap);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+    container-type: inline-size;
+    container-name: h5c3;
+  }
+}
+
+.h5c3-support {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  background: #3b0a0a;
+  color: #fff;
   text-align: center;
-  color: #ff3542;
 }
 
-#msg h1 {
-  color: #ff3542;
+@supports not (display: grid) {
+  .grid > * + * {
+    margin-top: 1rem;
+  }
 }
 
-#msg p {
-  color: #ff3542;
+html.debug :is(.grid, .subgrid) > *,
+:is(.grid, .subgrid)[data-debug] > * {
+  outline: 1px dashed color-mix(in srgb, #5b21b6 65%, transparent);
+  outline-offset: -1px;
 }
 
-/* Grid display helper */
-.debug * {
-  background: salmon;
-  border: 1px dotted grey;
+:is(.grid, .subgrid)[data-debug] > * {
+  position: relative;
+}
+
+:is(.grid, .subgrid)[data-debug] > *[data-place]::before {
+  content: attr(data-place);
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 0.35rem;
+  inset-inline-end: 0.35rem;
+  padding: 0.15rem 0.4rem;
+  border-radius: 0.25rem;
+  background: #241533;
+  color: #fff;
+  font: 600 0.7rem/1.3 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  pointer-events: none;
 }

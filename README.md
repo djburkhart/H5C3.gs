@@ -21,10 +21,10 @@ H5C3.gs (HTML5 CSS Grid System) version 2 is a responsive grid for current brows
 
 ## How columns are chosen
 
-A `.grid` uses `repeat(auto-fit, minmax(...))`.
+A `.grid` sizes its tracks with `repeat()` and `minmax()`.
 
-- **No `data-cols`.** As many columns as fit, each at least `--min` (default `16rem`).
-- **`data-cols="n"`.** At most *n* columns. The grid drops to fewer columns when an even share of the row would be narrower than `--min`.
+- **No `data-cols`.** As many columns as fit, each at least `--min` (default `16rem`). Empty columns collapse.
+- **`data-cols="n"`.** At most *n* columns, and those tracks stay in place even when a row is not full. The grid drops to fewer columns when an even share of the row would be narrower than `--min`.
 - **`data-layout="fixed"`.** Exactly `--cols` tracks. They shrink instead of wrapping.
 
 `data-cols` from 1 through 12 is built in. Browsers that support typed `attr()` accept any positive number. The script also copies `data-cols` onto `--cols`.

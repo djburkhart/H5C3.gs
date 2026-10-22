@@ -4,7 +4,8 @@
 
   A .grid lays out its children with CSS grid. Without data-cols it fits as
   many columns as --min allows. With data-cols it never exceeds that count,
-  and it drops to fewer columns when the container gets narrower.
+  keeps those tracks when a row is not full, and drops columns when the
+  container gets narrower.
 
   Spans and offsets are clamped so they cannot create extra columns.
   JavaScript (js/H5C3.js) measures the real track count and writes
@@ -77,7 +78,7 @@ select {
 */
 .grid[data-cols] {
   grid-template-columns: repeat(
-    auto-fit,
+    auto-fill,
     minmax(
       min(
         100%,
@@ -366,10 +367,7 @@ select {
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: subgrid;
-  gap: var(--gap, var(--h5c3-gap));
   min-width: 0;
-  container-type: inline-size;
-  container-name: h5c3;
 }
 
 .subgrid > * {
@@ -379,7 +377,14 @@ select {
 
 @supports not (grid-template-columns: subgrid) {
   .subgrid {
+    --cols: var(--h5c3-cols);
+    --min: var(--h5c3-min);
+    --gap: var(--h5c3-gap);
+    --current-cols: var(--cols);
+    gap: var(--gap);
     grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+    container-type: inline-size;
+    container-name: h5c3;
   }
 }
 

@@ -40,10 +40,8 @@
     };
   }
 
-  function trackCount(el) {
-    var value = global.getComputedStyle(el).gridTemplateColumns;
+  function countSizedTracks(value) {
     if (!value || value === "none") return 1;
-
     var parts = value.trim().split(/\s+/);
     var count = 0;
     for (var i = 0; i < parts.length; i += 1) {
@@ -51,6 +49,40 @@
       if (size >= 1) count += 1;
     }
     return Math.max(1, count);
+  }
+
+  function columnSpan(el, parentCols) {
+    var compact = global.getComputedStyle(el).gridColumn.replace(/\s+/g, "");
+    if (compact === "1/-1" || compact === "auto/-1") return Math.max(1, parentCols);
+
+    var bits = global.getComputedStyle(el).gridColumn.split("/");
+    if (bits.length !== 2) return Math.max(1, parentCols);
+
+    var start = parseInt(bits[0], 10);
+    var end = bits[1].trim();
+    if (end === "-1") {
+      return Math.max(1, parentCols - (Number.isFinite(start) ? start - 1 : 0));
+    }
+    var endNum = parseInt(end, 10);
+    if (Number.isFinite(start) && Number.isFinite(endNum) && endNum > start) {
+      return endNum - start;
+    }
+    return Math.max(1, parentCols);
+  }
+
+  function trackCount(el) {
+    var value = global.getComputedStyle(el).gridTemplateColumns;
+    if (value && value.indexOf("subgrid") !== -1) {
+      var parent = el.parentElement;
+      var parentCols = 1;
+      if (parent && parent.dataset.currentCols) {
+        parentCols = Number(parent.dataset.currentCols);
+      } else if (parent) {
+        parentCols = countSizedTracks(global.getComputedStyle(parent).gridTemplateColumns);
+      }
+      return columnSpan(el, parentCols);
+    }
+    return countSizedTracks(value);
   }
 
   function applyAuthorProps(el) {

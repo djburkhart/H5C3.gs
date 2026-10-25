@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>4×4 grid — H5C3.gs</title>
+    <meta name="description" content="A four-column H5C3.gs example with a two-column subgrid for the notes.">
+    <meta name="theme-color" content="#16111f">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700;900&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/H5C3.gs.css">
+    <link rel="stylesheet" href="css/examples.css">
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+
+    <section class="page" role="region" aria-label="four-column-grid">
+      <header class="mast" role="banner" aria-label="Banner two-column-subgrid">
+        <div class="brand-lockup">
+          <a class="brand" href="index.html"><span class="mark">H5C3<span>.gs</span></span></a>
+          <p>HTML5 CSS3 Grid System</p>
+        </div>
+        <div class="mast-links">
+          <a href="debug.html">Debug</a>
+          <a href="https://github.com/djburkhart/H5C3.gs">GitHub</a>
+        </div>
+      </header>
+
+      <nav class="nav" role="navigation" aria-label="Primary four-column-subgrid">
+        <a href="index.html">Overview</a>
+        <a href="2x2.html">2×2</a>
+        <a href="3x3.html">3×3</a>
+        <a href="4x4.html" aria-current="page">4×4</a>
+      </nav>
+
+      <main id="content" role="main" aria-label="Content four-column-subgrid">
+        <article class="hero span-all">
+          <p class="kicker">aria-label="four-column-grid"</p>
+          <h1>Four tracks across.</h1>
+          <p class="lede">This is the grid from the readme. Eight numbered cells fill two rows of four. The project notes under them are a two-column subgrid, so a nested count can differ from the page.</p>
+        </article>
+
+        <article class="track">
+          <p class="kicker">Row 1</p>
+          <h2>01</h2>
+          <p>Track one.</p>
+        </article>
+        <article class="track track-alt">
+          <p class="kicker">Row 1</p>
+          <h2>02</h2>
+          <p>Track two.</p>
+        </article>
+        <article class="track">
+          <p class="kicker">Row 1</p>
+          <h2>03</h2>
+          <p>Track three.</p>
+        </article>
+        <article class="track track-alt">
+          <p class="kicker">Row 1</p>
+          <h2>04</h2>
+          <p>Track four.</p>
+        </article>
+        <article class="track track-alt">
+          <p class="kicker">Row 2</p>
+          <h2>05</h2>
+          <p>Track one.</p>
+        </article>
+        <article class="track">
+          <p class="kicker">Row 2</p>
+          <h2>06</h2>
+          <p>Track two.</p>
+        </article>
+        <article class="track track-alt">
+          <p class="kicker">Row 2</p>
+          <h2>07</h2>
+          <p>Track three.</p>
+        </article>
+        <article class="track">
+          <p class="kicker">Row 2</p>
+          <h2>08</h2>
+          <p>Track four.</p>
+        </article>
+
+        <section class="span-all stack" aria-label="Notes two-column-subgrid">
+          <article class="note">
+            <p class="kicker">Project</p>
+            <h2>What H5C3.gs is</h2>
+            <p>H5C3.gs stands for HTML5 CSS3 Grid System. It is a small framework for modern browsers. The stylesheet checks for CSS grid, then builds equal tracks from a single formula.</p>
+          </article>
+          <aside class="note" role="complementary">
+            <p class="kicker">This page</p>
+            <h2>A nested two-column grid</h2>
+            <p>The cells above belong to <code>four-column-subgrid</code>. This note and the project blurb are <code>two-column-subgrid</code>, a grid inside the four-column content.</p>
+          </aside>
+        </section>
+      </main>
+
+      <footer class="colophon" role="contentinfo" aria-label="Footer two-column-subgrid">
+        <p>© Daniel Burkhart. Released under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+        <p class="footer-links">
+          <a href="debug.html">Debug the grid</a>
+          <a href="https://github.com/djburkhart/H5C3.gs">Source on GitHub</a>
+        </p>
+      </footer>
+    </section>
+
+    <script src="js/H5C3.js"></script>
+    <script src="js/site.js"></script>
+  </body>
+</html>

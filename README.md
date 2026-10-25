@@ -2,6 +2,8 @@
 
 H5C3.gs stands for "HTML5 CSS3 Grid System." H5C3.gs is a modern web framework designed for modern web browsers.
 
+The project site is [index.html](index.html). The [2×2](2x2.html), [3×3](3x3.html), and [4×4](4x4.html) pages show each column count, and [debug.html](debug.html) turns on the debug styles.
+
 ## Getting Started
 
 The following steps will get you ready to start using H5C3.gs on your next website or web application.

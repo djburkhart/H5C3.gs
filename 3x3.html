@@ -1,52 +1,105 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-
-    <title>H5C3.gs 3x3 Example</title>
-
-    <link rel="stylesheet" type="text/css" href="css/H5C3.gs.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:900" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/examples.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>3×3 grid — H5C3.gs</title>
+    <meta name="description" content="A three-column H5C3.gs example. The page label is three-column-grid.">
+    <meta name="theme-color" content="#16111f">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700;900&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/H5C3.gs.css">
+    <link rel="stylesheet" href="css/examples.css">
   </head>
   <body>
-    <section role="region" aria-label="three-column-grid">
-      <header role="banner">
-        <h1>H5C3.gs 3x3 Example</h1>
+    <a class="skip" href="#content">Skip to content</a>
+
+    <section class="page" role="region" aria-label="three-column-grid">
+      <header class="mast" role="banner" aria-label="Banner two-column-subgrid">
+        <div class="brand-lockup">
+          <a class="brand" href="index.html"><span class="mark">H5C3<span>.gs</span></span></a>
+          <p>HTML5 CSS3 Grid System</p>
+        </div>
+        <div class="mast-links">
+          <a href="debug.html">Debug</a>
+          <a href="https://github.com/djburkhart/H5C3.gs">GitHub</a>
+        </div>
       </header>
-      <nav role="navigation">
-        <ul>
-          <li>
-            <a href="2x2.html">2x2 Grid</a>
-          </li>
-          <li>
-            <a href="3x3.html">3x3 Grid</a>
-          </li>
-          <li>
-            <a href="index.html">4x4 Grid</a>
-          </li>
-        </ul>
+
+      <nav class="nav" role="navigation" aria-label="Primary four-column-subgrid">
+        <a href="index.html">Overview</a>
+        <a href="2x2.html">2×2</a>
+        <a href="3x3.html" aria-current="page">3×3</a>
+        <a href="4x4.html">4×4</a>
       </nav>
-      <main role="main" aria-label="two-column-subgrid">
-        <section role="region" aria-label="page-info">
-          <article>
-            <h2>Project Info</h2>
-            <p>H5C3.gs stands for "HTML5 CSS3 Grid System." H5C3.gs is a modern web framework designed for modern web browsers.</p>
-          </article>
-        </section>
-        <aside role="complementary">
-          <h2>Page Info</h2>
-          <p>This is an example of a 3x3 grid.</p>
+
+      <main id="content" role="main" aria-label="Content three-column-subgrid">
+        <article class="hero span-all">
+          <p class="kicker">aria-label="three-column-grid"</p>
+          <h1>Three equal tracks.</h1>
+          <p class="lede">The word <code>three</code> in the label sets both the page and this content grid. Six numbered cells show two full rows. The notes underneath fill a third.</p>
+        </article>
+
+        <article class="track">
+          <p class="kicker">Row 1</p>
+          <h2>01</h2>
+          <p>First track.</p>
+        </article>
+        <article class="track track-alt">
+          <p class="kicker">Row 1</p>
+          <h2>02</h2>
+          <p>Second track.</p>
+        </article>
+        <article class="track">
+          <p class="kicker">Row 1</p>
+          <h2>03</h2>
+          <p>Third track.</p>
+        </article>
+        <article class="track track-alt">
+          <p class="kicker">Row 2</p>
+          <h2>04</h2>
+          <p>First track.</p>
+        </article>
+        <article class="track">
+          <p class="kicker">Row 2</p>
+          <h2>05</h2>
+          <p>Second track.</p>
+        </article>
+        <article class="track track-alt">
+          <p class="kicker">Row 2</p>
+          <h2>06</h2>
+          <p>Third track.</p>
+        </article>
+
+        <article class="note">
+          <p class="kicker">Project</p>
+          <h2>What H5C3.gs is</h2>
+          <p>H5C3.gs stands for HTML5 CSS3 Grid System. Column width is calculated from the viewport, the gap, and the column count, so the tracks resize with the window.</p>
+        </article>
+        <article class="note">
+          <p class="kicker">This page</p>
+          <h2>A 3×3 example</h2>
+          <p>This is the three-column grid. The content label is <code>three-column-subgrid</code>, nested in a <code>three-column-grid</code> region.</p>
+        </article>
+        <aside class="note" role="complementary">
+          <p class="kicker">Try next</p>
+          <h2>Change the count</h2>
+          <p>Open the <a href="2x2.html">2×2</a> or <a href="4x4.html">4×4</a> page. The markup is the same idea with a different word in the label.</p>
         </aside>
       </main>
-      <footer role="contentinfo">
-        <article>
-          <p>&copy; Daniel Burkhart. All rights reserved.</p>
-        </article>
+
+      <footer class="colophon" role="contentinfo" aria-label="Footer two-column-subgrid">
+        <p>© Daniel Burkhart. Released under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+        <p class="footer-links">
+          <a href="debug.html">Debug the grid</a>
+          <a href="https://github.com/djburkhart/H5C3.gs">Source on GitHub</a>
+        </p>
       </footer>
     </section>
 
-    <script src="js/H5C3.js" type="text/javascript"></script>
+    <script src="js/H5C3.js"></script>
+    <script src="js/site.js"></script>
   </body>
 </html>

@@ -1,52 +1,154 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-
-    <title>H5C3.gs 4x4 Example</title>
-
-    <link rel="stylesheet" type="text/css" href="css/H5C3.gs.css">
-
-    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans+SC:900" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="css/examples.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>H5C3.gs — HTML5 CSS3 Grid System</title>
+    <meta name="description" content="H5C3.gs is a small HTML5 and CSS3 grid system. An aria-label picks two, three, or four columns, and a subgrid nests another grid inside.">
+    <meta name="theme-color" content="#16111f">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700;900&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/H5C3.gs.css">
+    <link rel="stylesheet" href="css/examples.css">
   </head>
   <body>
-    <section role="region" aria-label="four-column-grid">
-      <header role="banner">
-        <h1>H5C3.gs 4x4 Example</h1>
+    <a class="skip" href="#content">Skip to content</a>
+
+    <section class="page" role="region" aria-label="four-column-grid" data-debug-root>
+      <header class="mast" role="banner" aria-label="Banner two-column-subgrid">
+        <div class="brand-lockup">
+          <a class="brand" href="index.html"><span class="mark">H5C3<span>.gs</span></span></a>
+          <p>HTML5 CSS3 Grid System</p>
+        </div>
+        <div class="mast-links">
+          <a href="debug.html">Debug</a>
+          <a href="https://github.com/djburkhart/H5C3.gs">GitHub</a>
+        </div>
       </header>
-      <nav role="navigation">
-        <ul>
-          <li>
-            <a href="2x2.html">2x2 Grid</a>
-          </li>
-          <li>
-            <a href="3x3.html">3x3 Grid</a>
-          </li>
-          <li>
-            <a href="index.html">4x4 Grid</a>
-          </li>
-        </ul>
+
+      <nav class="nav" role="navigation" aria-label="Primary four-column-subgrid">
+        <a href="index.html" aria-current="page">Overview</a>
+        <a href="2x2.html">2×2</a>
+        <a href="3x3.html">3×3</a>
+        <a href="4x4.html">4×4</a>
       </nav>
-      <main role="main" aria-label="two-column-subgrid">
-        <section role="region" aria-label="page-info">
-          <article>
-            <h2>Project Info</h2>
-            <p>H5C3.gs stands for "HTML5 CSS3 Grid System." H5C3.gs is a modern web framework designed for modern web browsers.</p>
-          </article>
-        </section>
-        <aside role="complementary">
-          <h2>Page Info</h2>
-          <p>This is an example of a 4x4 grid.</p>
-        </aside>
-      </main>
-      <footer role="contentinfo">
-        <article>
-          <p>&copy; Daniel Burkhart. All rights reserved.</p>
+
+      <main id="content" class="home" role="main" aria-label="Overview four-column-subgrid">
+        <article class="hero span-all">
+          <p class="kicker">A grid you switch on with a label</p>
+          <h1>Columns from a single aria-label.</h1>
+          <p class="lede">H5C3.gs is a small grid system for modern browsers. Name two, three, or four columns on an element and the stylesheet builds that many tracks. A child marked as a subgrid does the same thing inside its parent.</p>
+          <div class="actions">
+            <a class="button" href="4x4.html">Open the 4×4 grid</a>
+            <a class="button button-quiet" href="https://github.com/djburkhart/H5C3.gs">Read the source</a>
+          </div>
         </article>
+
+        <article class="card">
+          <p class="kicker">01 · Count</p>
+          <h2>Two, three, or four</h2>
+          <p>Those words in an <code>aria-label</code> set the column count. <code>four-column-grid</code> is a four-track grid. Nothing else is required.</p>
+        </article>
+        <article class="card">
+          <p class="kicker">02 · Nest</p>
+          <h2>Grids inside grids</h2>
+          <p>Add <code>subgrid</code> to a child label, as in <code>two-column-subgrid</code>. The inner gap is half the outer gap, and the tracks use the parent’s width.</p>
+        </article>
+        <article class="card">
+          <p class="kicker">03 · Support</p>
+          <h2>A quiet fallback</h2>
+          <p><code>@supports</code> keeps the grid off when a browser cannot draw it. <code>js/H5C3.js</code> replaces the page with a short message in that case.</p>
+        </article>
+        <article class="card">
+          <p class="kicker">04 · Debug</p>
+          <h2>See every box</h2>
+          <p>The class <code>debug</code> fills each element with salmon and a dotted border. Use it while you check placement, then take it off.</p>
+        </article>
+
+        <section class="panel span-all formula stack" aria-label="Formula two-column-subgrid">
+          <div>
+            <p class="kicker">The formula</p>
+            <h2>One calculation for every track</h2>
+            <p>Column width is the target width, minus the gaps, split by the number of columns. <code>--target-width</code>, <code>--column-spacing</code>, and <code>--columns</code> live on <code>:root</code>. Change them once and every grid follows.</p>
+          </div>
+          <pre><code>(target-width
+  - (column-spacing × (columns + 1)))
+/ columns</code></pre>
+        </section>
+
+        <div class="section-title span-all">
+          <p class="kicker">Examples</p>
+          <h2>Same system, three counts</h2>
+        </div>
+
+        <article class="card">
+          <p class="kicker">2×2</p>
+          <h2>Two columns</h2>
+          <p>A pair of tracks for a story and an aside. The count comes from <code>two-column-grid</code>.</p>
+          <a class="text-link" href="2x2.html">Open the 2×2 grid</a>
+        </article>
+        <article class="card">
+          <p class="kicker">3×3</p>
+          <h2>Three columns</h2>
+          <p>Three equal tracks, then another row of three. Switch the label to <code>three-column-grid</code>.</p>
+          <a class="text-link" href="3x3.html">Open the 3×3 grid</a>
+        </article>
+        <article class="card">
+          <p class="kicker">4×4</p>
+          <h2>Four columns</h2>
+          <p>The layout from the readme. A two-column subgrid sits inside the four-column page.</p>
+          <a class="text-link" href="4x4.html">Open the 4×4 grid</a>
+        </article>
+        <article class="card">
+          <p class="kicker">Debug</p>
+          <h2>Paint the boxes</h2>
+          <p>Turn on the built-in debug styles and every region in the grid picks up a salmon fill.</p>
+          <a class="text-link" href="debug.html">Open the debug page</a>
+        </article>
+
+        <section class="panel span-all">
+          <p class="kicker">Start here</p>
+          <h2>Mark up a region</h2>
+          <p>The <code>aria-label</code> is the switch. This page uses the same shape: a four-column grid, a two-column banner, and a four-column subgrid for the content.</p>
+          <pre><code>&lt;section role="region" aria-label="four-column-grid"&gt;
+  &lt;header role="banner" aria-label="Banner two-column-subgrid"&gt;
+    &lt;h1&gt;Example heading&lt;/h1&gt;
+  &lt;/header&gt;
+  &lt;nav role="navigation" aria-label="Primary four-column-subgrid"&gt;
+    &lt;a href="#"&gt;Link 1&lt;/a&gt;
+    &lt;a href="#"&gt;Link 2&lt;/a&gt;
+    &lt;a href="#"&gt;Link 3&lt;/a&gt;
+    &lt;a href="#"&gt;Link 4&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;main role="main" aria-label="two-column-subgrid"&gt;
+    &lt;article&gt;
+      &lt;h2&gt;Article heading&lt;/h2&gt;
+      &lt;p&gt;Article text.&lt;/p&gt;
+    &lt;/article&gt;
+    &lt;aside role="complementary"&gt;
+      &lt;h2&gt;Aside heading&lt;/h2&gt;
+      &lt;p&gt;Aside text.&lt;/p&gt;
+    &lt;/aside&gt;
+  &lt;/main&gt;
+  &lt;footer role="contentinfo"&gt;
+    &lt;p&gt;&amp;copy; Your copyright info.&lt;/p&gt;
+  &lt;/footer&gt;
+&lt;/section&gt;</code></pre>
+        </section>
+      </main>
+
+      <footer class="colophon" role="contentinfo" aria-label="Footer two-column-subgrid">
+        <p>© Daniel Burkhart. Released under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+        <p class="footer-links">
+          <a href="debug.html">Debug the grid</a>
+          <a href="https://github.com/djburkhart/H5C3.gs">Source on GitHub</a>
+        </p>
       </footer>
     </section>
 
-    <script src="js/H5C3.js" type="text/javascript"></script>
+    <script src="js/H5C3.js"></script>
+    <script src="js/site.js"></script>
   </body>
 </html>

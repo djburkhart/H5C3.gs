@@ -1,1 +1,2 @@
-theme: jekyll-theme-architect
+title: H5C3.gs
+description: HTML5 CSS3 Grid System. Column counts come from an aria-label, and nested grids use the same idea.

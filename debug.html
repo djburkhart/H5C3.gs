@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Debug — H5C3.gs</title>
+    <meta name="description" content="Turn on the H5C3.gs debug class to paint every box in the grid with a salmon fill and a dotted border.">
+    <meta name="theme-color" content="#16111f">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@500;700;900&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/H5C3.gs.css">
+    <link rel="stylesheet" href="css/examples.css">
+  </head>
+  <body>
+    <a class="skip" href="#content">Skip to content</a>
+
+    <section class="page" role="region" aria-label="four-column-grid" data-debug-root>
+      <header class="mast" role="banner" aria-label="Banner two-column-subgrid">
+        <div class="brand-lockup">
+          <a class="brand" href="index.html"><span class="mark">H5C3<span>.gs</span></span></a>
+          <p>HTML5 CSS3 Grid System</p>
+        </div>
+        <div class="mast-links">
+          <a href="debug.html" aria-current="page">Debug</a>
+          <a href="https://github.com/djburkhart/H5C3.gs">GitHub</a>
+        </div>
+      </header>
+
+      <nav class="nav" role="navigation" aria-label="Primary four-column-subgrid">
+        <a href="index.html">Overview</a>
+        <a href="2x2.html">2×2</a>
+        <a href="3x3.html">3×3</a>
+        <a href="4x4.html">4×4</a>
+      </nav>
+
+      <main id="content" role="main" aria-label="Content four-column-subgrid">
+        <article class="hero span-all">
+          <p class="kicker">Class debug</p>
+          <h1>Paint every box.</h1>
+          <p class="lede">H5C3.gs.css includes a debug view. Add the class <code>debug</code> to a grid and each element inside it gets a salmon background and a dotted border. The button adds that class to this page.</p>
+          <div class="debug-row">
+            <button type="button" class="debug-toggle" data-debug-toggle aria-pressed="false">Show debug styles</button>
+          </div>
+        </article>
+
+        <article class="track">
+          <p class="kicker">Region</p>
+          <h2>01</h2>
+          <p>Article</p>
+        </article>
+        <article class="track track-alt">
+          <p class="kicker">Region</p>
+          <h2>02</h2>
+          <p>Article</p>
+        </article>
+        <aside class="track" role="complementary">
+          <p class="kicker">Region</p>
+          <h2>03</h2>
+          <p>Aside</p>
+        </aside>
+        <article class="track track-alt">
+          <p class="kicker">Region</p>
+          <h2>04</h2>
+          <p>Article</p>
+        </article>
+
+        <section class="panel span-all">
+          <p class="kicker">From H5C3.gs.css</p>
+          <h2>The rule that does the painting</h2>
+          <p>Put <code>debug</code> on a parent. The universal selector inside it outlines every descendant, which makes nested grids easy to see.</p>
+          <pre><code>.debug * {
+  background: salmon;
+  border: 1px dotted grey;
+}</code></pre>
+        </section>
+      </main>
+
+      <footer class="colophon" role="contentinfo" aria-label="Footer two-column-subgrid">
+        <p>© Daniel Burkhart. Released under the <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>.</p>
+        <p class="footer-links">
+          <a href="index.html">Back to the overview</a>
+          <a href="https://github.com/djburkhart/H5C3.gs">Source on GitHub</a>
+        </p>
+      </footer>
+    </section>
+
+    <script src="js/H5C3.js"></script>
+    <script src="js/site.js"></script>
+  </body>
+</html>
